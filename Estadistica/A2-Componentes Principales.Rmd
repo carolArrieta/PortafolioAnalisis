@@ -1,0 +1,52 @@
+---
+title: "A2-Componentes Principales"
+author: "**A01275465 Carol Arrieta Moreno**"
+date: "2023-09-29"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+datos = read.csv("paises_mundo.csv") 
+```
+*Parte 1*
+```{r}
+cov(datos)
+```
+```{r}
+cor(datos)
+```
+```{r}
+eigen(cov(datos))[1]
+```
+```{r}
+sum(diag(cov(datos)))
+```
+
+*Parte 2*
+```{r}
+library(stats)
+library(factoextra)
+library(ggplot2)
+
+cpS=princomp(datos,cor=FALSE)
+cpaS=as.matrix(datos)%*%cpS$loadings
+plot(cpaS[,1:2],type="p")
+text(cpaS[,1],cpaS[,2],1:nrow(cpaS))
+biplot(cpS)
+```
+
+
+*Parte 3*
+```{r}
+library(FactoMineR)
+library(factoextra)
+library(ggplot2) 
+cp3 = PCA(datos)
+fviz_pca_ind(cp3, col.ind = "blue", addEllipses = TRUE, repel = TRUE)
+fviz_screeplot(cp3)
+fviz_contrib(cp3, choice = c("var")
+```
+

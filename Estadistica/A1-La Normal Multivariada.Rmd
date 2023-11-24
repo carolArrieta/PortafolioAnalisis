@@ -1,0 +1,52 @@
+---
+title: "A1-La Normal Multivariada"
+author: "**A01275465 Carol Arrieta Moreno**"
+date: "2023-09-22"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**1.Hallar el procedimiento para el cálculo de probabilidad**
+
+```{r}
+library(mnormt)
+sigma = matrix(c(1.2, 0, 0, 2.3), nrow = 2)
+x = seq(2,3)
+miu = c(2.5,4)
+pmnorm(x, miu, sigma)
+```
+**2. Grafique la anterior distribución bivariada del problema 1**
+
+```{r}
+library(mnormt)
+x     <- seq(-1, 6, 0.1) 
+y     <- seq(-1, 9, 0.1)
+miu = c(2.5,4)
+sigma = matrix(c(1.2, 0, 0, 2.3), nrow = 2)
+f     <- function(x, y) dmnorm(cbind(x, y), miu, sigma)
+z     <- outer(x, y, f)
+#create surface plot
+persp(x, y, z, theta=-30, phi=25, expand=0.6, ticktype='detailed', col = "pink")
+```
+
+**3. Grafique los contornos de la anterior distribución normal bivariada correspondiente a las alturas de  0.01,  0.03, 0.05, 0.07, 0.09**
+
+```{r}
+library(mnormt)
+#create bivariate normal distribution
+x     <- seq(-1, 6, 0.1) 
+y     <- seq(-1, 9, 0.1)
+miu = c(2.5,4)
+sigma = matrix(c(1.2, 0, 0, 2.3), nrow = 2)
+f     <- function(x, y) dmnorm(cbind(x, y), miu, sigma)
+z     <- outer(x, y, f)
+
+#create contour plot
+contour(x, y, z, col = "blue", levels = c( 0.01,  0.03, 0.05, 0.07, 0.09))
+```
+**3. Comenta tus resultados: ¿cómo se relaciona el resultado del primer inciso con el segundo? ¿cómo se relacionan los gráficos de los incisos 2 y 3?**
+
+
+Los graficos del inciso 2 y 3 son mostrados desde diferentes perspectivas, mientras que la gráfica del punto 2 nos muestra una imagen de como se vería en la gráfica 3 se nos muestra el punto exacto en donde se encunetra de acuerdo a la altura dada, es como verlo desde arriba, y la distribucion en la que se encuentra de acuerdo a las alturas que le dimos
